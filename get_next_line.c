@@ -13,7 +13,7 @@ void	eof(char **text, char **line)
 int	sline(char **text, char **line)
 {
 	char	*tmp;
-	int		i;
+	int	i;
 
 	i = 0;
 	while ((*text)[i] != '\0' && (*text)[i] != '\n')
@@ -30,7 +30,7 @@ int	sline(char **text, char **line)
 		return (0);
 }
 
-void	store(char **text, char *buf)
+void	stext(char **text, char *buf)
 {
 	char	*tmp;
 
@@ -51,7 +51,7 @@ int	get_next_line(int fd, char **line)
 	ssize_t		ret;
 	char		buf[BUFFER_SIZE + 1];
 
-	if (read(fd, 0, 0) == -1 || !line || BUFFER_SIZE < 1)
+	if (read(fd, 0, 0) == -1 || fd < 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	if (text[fd] && sline(&text[fd], line))
 		return (1);
@@ -59,7 +59,7 @@ int	get_next_line(int fd, char **line)
 	while (ret > 0)
 	{
 		buf[ret] = '\0';
-		store(&text[fd], buf);
+		stext(&text[fd], buf);
 		if (sline(&text[fd], line))
 			return (1);
 		ret = read(fd, buf, BUFFER_SIZE);
@@ -72,3 +72,24 @@ int	get_next_line(int fd, char **line)
 	*line = ft_strdup("");
 	return (0);
 }
+
+/*int		main(int ac, char **av)
+{
+	int		fd;
+	int		ret_value;
+	char	*line;
+
+	line = NULL;
+	fd = open(av[1], O_RDONLY);
+	if (ac > 1)
+	if (fd == -1)
+		return (-1);
+	ret_value = 1;
+	while (ret_value == 1)
+	{
+		ret_value = get_next_line(fd, &line);
+		printf("%d |>>| %s\n", ret_value, line);
+	}
+	close(fd);
+	return (0);
+}*/
