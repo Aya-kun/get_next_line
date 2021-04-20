@@ -5,30 +5,30 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 		i++;
 	return (i);
 }
 
 char	*ft_strdup(const char *s1)
 {
-	char	*s2;
+	char	*dup;
 	size_t	i;
 
 	i = 0;
 	while (s1[i])
 		i++;
-	s2 = malloc(sizeof(char) * (i + 1));
-	if (!s2)
+	dup = malloc(sizeof(char) * (i + 1));
+	if (!dup)
 		return (NULL);
 	i = 0;
 	while (s1[i])
 	{
-		s2[i] = s1[i];
+		dup[i] = s1[i];
 		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	dup[i] = '\0';
+	return (dup);
 }
 
 char	*ft_strchr(const char *s, int c)
