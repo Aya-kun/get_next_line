@@ -13,7 +13,7 @@ void	eof(char **text, char **line)
 int	sline(char **text, char **line)
 {
 	char	*tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	while ((*text)[i] != '\0' && (*text)[i] != '\n')
@@ -51,7 +51,7 @@ int	get_next_line(int fd, char **line)
 	ssize_t		ret;
 	char		buf[BUFFER_SIZE + 1];
 
-	if (read(fd, 0, 0) == -1 || fd < 0 || !line || BUFFER_SIZE < 1)
+	if (read(fd, 0, 0) == -1 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	if (text[fd] && sline(&text[fd], line))
 		return (1);
